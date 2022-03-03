@@ -55,8 +55,20 @@ class RegisterView(APIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
         except Exception as e:
-            print('Server exception', e)
+            print('Server exception:', e)
             return Response(
                 {'error': 'Something went wrong while trying to register account'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class LoadUserView(APIView):
+    def get(self, request, format=None):
+        try:
+            user = request.user
+        except Exception as e:
+            print('Server exception:', e)
+            return Response(
+                {'error': 'Something went wrong while trying to load user'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
