@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 from django.contrib.auth.models import User
 
+from account.serializers import UserSerializer
+
 
 class RegisterView(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -66,6 +68,12 @@ class LoadUserView(APIView):
     def get(self, request, format=None):
         try:
             user = request.user
+            user = UserSerializer(user)
+
+            return Response(
+                {'user': user.data},
+                status=status.HTTP_200_OK
+            )
         except Exception as e:
             print('Server exception:', e)
             return Response(
