@@ -3,6 +3,9 @@ import {
   REGISTER_FAIL,
   SET_AUTH_LOADING,
   REMOVE_AUTH_LOADING,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  RESET_REGISTER_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -24,6 +27,21 @@ const authReducer = (state = initialState, action) => {
     case REGISTER_FAIL:
       return {
         ...state,
+      };
+    case RESET_REGISTER_SUCCESS:
+      return {
+        ...state,
+        register_success: false,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: false,
       };
     case SET_AUTH_LOADING:
       return {

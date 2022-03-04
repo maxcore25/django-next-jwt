@@ -1,7 +1,7 @@
 import cookie from 'cookie';
 import { API_URL } from '../../../config/index';
 
-export default nice = async (req, res) => {
+export default async (req, res) => {
   if (req === 'POST') {
     const { username, password } = req.body;
 

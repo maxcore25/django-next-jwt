@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../actions/auth';
+import { login, reset_register_success } from '../actions/auth';
 import Layout from '../hocs/Layout';
 import Loader from 'react-loader-spinner';
 import { useRouter } from 'next/router';
@@ -18,17 +18,21 @@ const Login = () => {
 
   const { username, password } = formData;
 
+  useEffect(() => {
+    if (dispatch && dispatch !== null && dispatch !== undefined) {
+      dispatch(reset_register_success());
+    }
+  }, []);
+
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
     e.preventDefault();
 
-    // if (dispatch && dispatch !== null && dispatch !== undefined) {
-    //   dispatch(
-    //     register(first_name, last_name, username, password, re_password)
-    //   );
-    // }
+    if (dispatch && dispatch !== null && dispatch !== undefined) {
+      dispatch(login(username, password));
+    }
   };
 
   if (typeof window !== 'undefined' && isAuthenticated) {
