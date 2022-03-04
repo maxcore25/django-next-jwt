@@ -37,6 +37,60 @@ const Register = () => {
             required
           />
         </div>
+        <div>
+          <div>
+            <label htmlFor='last_name'>Last name*</label>
+          </div>
+          <input
+            type='text'
+            name='last_name'
+            id='last_name'
+            onChange={onChange}
+            value={last_name}
+            required
+          />
+        </div>
+        <div>
+          <div>
+            <label htmlFor='username'>Username*</label>
+          </div>
+          <input
+            type='text'
+            name='username'
+            id='username'
+            onChange={onChange}
+            value={username}
+            required
+          />
+        </div>
+        <div>
+          <div>
+            <label htmlFor='password'>Password*</label>
+          </div>
+          <input
+            type='text'
+            name='password'
+            id='password'
+            onChange={onChange}
+            value={password}
+            required
+          />
+        </div>
+        <div>
+          <div>
+            <label htmlFor='re_password'>Repeat Password*</label>
+          </div>
+          <input
+            type='text'
+            name='re_password'
+            id='re_password'
+            onChange={onChange}
+            value={re_password}
+            required
+            minLength={8}
+          />
+        </div>
+        <button type='submit'>Sign Up</button>
       </form>
     </Layout>
   );
