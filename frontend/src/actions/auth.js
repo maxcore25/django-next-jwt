@@ -1,4 +1,9 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL } from './types';
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  SET_AUTH_LOADING,
+  REMOVE_AUTH_LOADING,
+} from './types';
 
 export const register =
   (first_name, last_name, username, password, re_password) =>
@@ -9,6 +14,10 @@ export const register =
       username,
       password,
       re_password,
+    });
+
+    dispatch({
+      type: SET_AUTH_LOADING,
     });
 
     try {
@@ -35,4 +44,8 @@ export const register =
         type: REGISTER_FAIL,
       });
     }
+
+    dispatch({
+      type: REMOVE_AUTH_LOADING,
+    });
   };
