@@ -53,7 +53,7 @@ export const register =
     });
   };
 
-export const reset_register_success = () => async dispatch => {
+export const reset_register_success = () => dispatch => {
   dispatch({
     type: RESET_REGISTER_SUCCESS,
   });

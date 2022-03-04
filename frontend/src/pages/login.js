@@ -22,7 +22,7 @@ const Login = () => {
     if (dispatch && dispatch !== null && dispatch !== undefined) {
       dispatch(reset_register_success());
     }
-  }, []);
+  }, [dispatch]);
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -73,7 +73,7 @@ const Login = () => {
         </div>
         {loading ? (
           <div>
-            <Loader type='Oval' color='#00bfff' width={50} height={50} />
+            {/* <Loader type='Oval' color='#00bfff' width={50} height={50} /> */}
           </div>
         ) : (
           <button type='submit'>Sign In</button>
