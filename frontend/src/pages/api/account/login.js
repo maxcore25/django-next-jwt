@@ -1,7 +1,7 @@
 import cookie from 'cookie';
 import { API_URL } from '../../../config/index';
 
-const login = async (req, res) => {
+export default async (req, res) => {
   if (req.method === 'POST') {
     const { username, password } = req.body;
 
@@ -58,4 +58,4 @@ const login = async (req, res) => {
   }
 };
 
-export default login;
+// export default login;

@@ -13,10 +13,6 @@ import {
 } from './types';
 
 export const load_user = () => async dispatch => {
-  dispatch({
-    type: SET_AUTH_LOADING,
-  });
-
   try {
     const res = await fetch('/api/account/user', {
       method: 'GET',
@@ -24,6 +20,7 @@ export const load_user = () => async dispatch => {
         Accept: 'application/json',
       },
     });
+
     const data = await res.json();
 
     if (res.status === 200) {
@@ -36,15 +33,11 @@ export const load_user = () => async dispatch => {
         type: LOAD_USER_FAIL,
       });
     }
-  } catch (error) {
+  } catch (err) {
     dispatch({
       type: LOAD_USER_FAIL,
     });
   }
-
-  dispatch({
-    type: REMOVE_AUTH_LOADING,
-  });
 };
 
 export const register =
@@ -122,6 +115,7 @@ export const login = (username, password) => async dispatch => {
       dispatch({
         type: LOGIN_SUCCESS,
       });
+      dispatch(load_user());
     } else {
       dispatch({
         type: LOGIN_FAIL,
