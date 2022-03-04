@@ -8,7 +8,44 @@ import {
   RESET_REGISTER_SUCCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+  LOAD_USER_SUCCESS,
+  LOAD_USER_FAIL,
 } from './types';
+
+export const load_user = () => async dispatch => {
+  dispatch({
+    type: SET_AUTH_LOADING,
+  });
+
+  try {
+    const res = await fetch('/api/account/user', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    const data = await res.json();
+
+    if (res.status === 200) {
+      dispatch({
+        type: LOAD_USER_SUCCESS,
+        payload: data,
+      });
+    } else {
+      dispatch({
+        type: LOAD_USER_FAIL,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: LOAD_USER_FAIL,
+    });
+  }
+
+  dispatch({
+    type: REMOVE_AUTH_LOADING,
+  });
+};
 
 export const register =
   (first_name, last_name, username, password, re_password) =>
