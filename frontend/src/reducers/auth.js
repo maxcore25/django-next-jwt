@@ -8,6 +8,8 @@ import {
   RESET_REGISTER_SUCCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+  LOAD_USER_SUCCESS,
+  LOAD_USER_FAIL,
 } from '../actions/types';
 
 const initialState = {
@@ -49,6 +51,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: false,
+        user: null,
       };
     case LOGOUT_FAIL:
       return {
@@ -63,6 +66,16 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+      };
+    case LOAD_USER_SUCCESS:
+      return {
+        ...state,
+        user: payload.user,
+      };
+    case LOAD_USER_FAIL:
+      return {
+        ...state,
+        user: null,
       };
     default:
       return state;

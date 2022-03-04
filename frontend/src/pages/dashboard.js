@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import Layout from '../hocs/Layout';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Dashboard = () => {
   useEffect(() => {
