@@ -1,6 +1,6 @@
 import { API_URL } from '../../../config/index';
 
-export default async (req, res) => {
+const register = async (req, res) => {
   if (req.method === 'POST') {
     const { first_name, last_name, username, password, re_password } = req.body;
 
@@ -40,3 +40,5 @@ export default async (req, res) => {
     return res.status(405).json({ error: `Method ${req.method} not allowed` });
   }
 };
+
+export default register;
