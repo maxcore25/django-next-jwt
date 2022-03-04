@@ -1,7 +1,6 @@
 import cookie from 'cookie';
-import { API_URL } from '../../../config/index';
 
-export default nice = async (req, res) => {
+export default async (req, res) => {
   if (req.method === 'POST') {
     res.setHeader('Set-Cookie', [
       cookie.serialize('access', '', {
