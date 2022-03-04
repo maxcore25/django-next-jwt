@@ -1,7 +1,14 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../actions/auth';
 import Layout from '../hocs/Layout';
+import Loader from 'react-loader-spinner';
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
+  const register_success = useSelector(state => state.auth.register_success);
+
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -17,6 +24,12 @@ const Register = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+    console.log(dispatch);
+    if (dispatch && dispatch !== null && dispatch !== undefined) {
+      dispatch(
+        register(first_name, last_name, username, password, re_password)
+      );
+    }
   };
 
   return (
@@ -68,7 +81,7 @@ const Register = () => {
             <label htmlFor='password'>Password*</label>
           </div>
           <input
-            type='text'
+            type='password'
             name='password'
             id='password'
             onChange={onChange}
@@ -81,7 +94,7 @@ const Register = () => {
             <label htmlFor='re_password'>Repeat Password*</label>
           </div>
           <input
-            type='text'
+            type='password'
             name='re_password'
             id='re_password'
             onChange={onChange}

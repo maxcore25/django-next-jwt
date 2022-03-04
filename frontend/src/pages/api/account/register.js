@@ -1,6 +1,6 @@
 import { API_URL } from '../../../config/index';
 
-export default register = async (req, res) => {
+export default async (req, res) => {
   if (req.method === 'POST') {
     const { first_name, last_name, username, password, re_password } = req.body;
 
