@@ -14,4 +14,9 @@ const Layout = ({ title, content, children }) => {
   );
 };
 
+Layout.defaultProps = {
+  title: 'httpOnly Auth',
+  content: 'Nice description',
+};
+
 export default Layout;
