@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
 import Layout from '../hocs/Layout';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
-  useEffect(() => {
-    fetch('/api/account/user', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-      },
-    });
-  }, []);
+  const router = useRouter();
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const user = useSelector(state => state.auth.user);
+  const loading = useSelector(state => state.auth.loading);
+
+  if (typeof window !== 'undefined' && !loading && !isAuthenticated) {
+    router.push('/login');
+  }
 
   return (
     <Layout title='httpOnly Auth | Dashboard' content='Nice description'>
-      <h1>Dashboard</h1>
+      <h1>User Dashboard</h1>
+      <p>Welcome {user !== null && user.first_name} to the httpOnly</p>
     </Layout>
   );
 };
