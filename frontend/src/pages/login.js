@@ -71,8 +71,13 @@ const Login = () => {
             required
           />
         </div>
-
-        <button type='submit'>Sign In</button>
+        {loading ? (
+          <div>
+            <Loader type='Oval' color='#00bfff' width={50} height={50} />
+          </div>
+        ) : (
+          <button type='submit'>Sign In</button>
+        )}
       </form>
     </Layout>
   );

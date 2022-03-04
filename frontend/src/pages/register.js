@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../actions/auth';
 import Layout from '../hocs/Layout';
 import Loader from 'react-loader-spinner';
+import { useRouter } from 'next/router';
 
 const Register = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.loading);
   const register_success = useSelector(state => state.auth.register_success);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
   const [formData, setFormData] = useState({
     first_name: '',
@@ -31,6 +34,13 @@ const Register = () => {
       );
     }
   };
+
+  if (typeof window !== 'undefined' && isAuthenticated) {
+    router.push('/dashboard');
+  }
+  if (register_success) {
+    router.push('/login');
+  }
 
   return (
     <Layout title='httpOnly Auth | Register' content='Nice description'>
@@ -103,7 +113,13 @@ const Register = () => {
             minLength={8}
           />
         </div>
-        <button type='submit'>Sign Up</button>
+        {loading ? (
+          <div>
+            <Loader type='Oval' color='#00bfff' width={50} height={50} />
+          </div>
+        ) : (
+          <button type='submit'>Sign Up</button>
+        )}
       </form>
     </Layout>
   );
