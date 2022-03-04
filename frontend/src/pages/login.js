@@ -40,7 +40,7 @@ const Login = () => {
   }
 
   return (
-    <Layout title='httpOnly Auth | Register' content='Nice description'>
+    <Layout title='httpOnly Auth | Login' content='Nice description'>
       <h1>Login Page</h1>
       <form onSubmit={onSubmit}>
         <h3>Log into Account</h3>
