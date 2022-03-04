@@ -3,6 +3,8 @@ import {
   REGISTER_FAIL,
   SET_AUTH_LOADING,
   REMOVE_AUTH_LOADING,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
 } from './types';
 
 export const register =
