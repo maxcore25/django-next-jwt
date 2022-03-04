@@ -24,7 +24,7 @@ const Register = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(dispatch);
+
     if (dispatch && dispatch !== null && dispatch !== undefined) {
       dispatch(
         register(first_name, last_name, username, password, re_password)

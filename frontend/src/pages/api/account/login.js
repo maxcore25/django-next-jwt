@@ -2,7 +2,7 @@ import cookie from 'cookie';
 import { API_URL } from '../../../config/index';
 
 export default async (req, res) => {
-  if (req === 'POST') {
+  if (req.method === 'POST') {
     const { username, password } = req.body;
 
     const body = JSON.stringify({
@@ -12,7 +12,7 @@ export default async (req, res) => {
 
     try {
       // * This response is from Django
-      const apiRes = await fetch(`${API_URL}/api/token`, {
+      const apiRes = await fetch(`${API_URL}/api/token/`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
