@@ -101,38 +101,32 @@ export const login = (username, password) => async dispatch => {
   });
 };
 
-export const logout = (username, password) => async dispatch => {
-  const body = JSON.stringify({
-    username,
-    password,
-  });
-
+export const logout = () => async dispatch => {
   dispatch({
     type: SET_AUTH_LOADING,
   });
 
   try {
-    const res = await fetch('/api/account/login', {
+    const res = await fetch('/api/account/logout', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: body,
     });
 
     if (res.status === 200) {
       dispatch({
-        type: LOGIN_SUCCESS,
+        type: LOGOUT_SUCCESS,
       });
     } else {
       dispatch({
-        type: LOGIN_FAIL,
+        type: LOGOUT_FAIL,
       });
     }
   } catch (error) {
     dispatch({
-      type: LOGIN_FAIL,
+      type: LOGOUT_FAIL,
     });
   }
 
