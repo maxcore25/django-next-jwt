@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../actions/auth';
 import Layout from '../hocs/Layout';
 import Loader from 'react-loader-spinner';
+import { useRouter } from 'next/router';
 
 const Login = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.loading);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -21,45 +23,24 @@ const Login = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(dispatch);
-    if (dispatch && dispatch !== null && dispatch !== undefined) {
-      dispatch(
-        register(first_name, last_name, username, password, re_password)
-      );
-    }
+
+    // if (dispatch && dispatch !== null && dispatch !== undefined) {
+    //   dispatch(
+    //     register(first_name, last_name, username, password, re_password)
+    //   );
+    // }
   };
+
+  if (typeof window !== 'undefined' && isAuthenticated) {
+    router.push('/dashboard');
+  }
 
   return (
     <Layout title='httpOnly Auth | Register' content='Nice description'>
-      <h1>Register Page</h1>
+      <h1>Login Page</h1>
       <form onSubmit={onSubmit}>
-        <h3>Create an Account</h3>
-        <div>
-          <div>
-            <label htmlFor='first_name'>First name*</label>
-          </div>
-          <input
-            type='text'
-            name='first_name'
-            id='first_name'
-            onChange={onChange}
-            value={first_name}
-            required
-          />
-        </div>
-        <div>
-          <div>
-            <label htmlFor='last_name'>Last name*</label>
-          </div>
-          <input
-            type='text'
-            name='last_name'
-            id='last_name'
-            onChange={onChange}
-            value={last_name}
-            required
-          />
-        </div>
+        <h3>Log into Account</h3>
+
         <div>
           <div>
             <label htmlFor='username'>Username*</label>
@@ -86,21 +67,8 @@ const Login = () => {
             required
           />
         </div>
-        <div>
-          <div>
-            <label htmlFor='re_password'>Repeat Password*</label>
-          </div>
-          <input
-            type='password'
-            name='re_password'
-            id='re_password'
-            onChange={onChange}
-            value={re_password}
-            required
-            minLength={8}
-          />
-        </div>
-        <button type='submit'>Sign Up</button>
+
+        <button type='submit'>Sign In</button>
       </form>
     </Layout>
   );
