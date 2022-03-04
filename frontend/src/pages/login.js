@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../actions/auth';
+import { login } from '../actions/auth';
 import Layout from '../hocs/Layout';
 import Loader from 'react-loader-spinner';
 import { useRouter } from 'next/router';
