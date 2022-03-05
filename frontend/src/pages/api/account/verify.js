@@ -25,7 +25,6 @@ const verify = async (req, res) => {
         },
         body: body,
       });
-      const data = await apiRes.json();
 
       if (apiRes.status === 200) {
         return res.status(200).json({ success: 'Authenticated successfully' });
