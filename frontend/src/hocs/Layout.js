@@ -1,7 +1,17 @@
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { check_auth_status } from '../actions/auth';
 
 const Layout = ({ title, content, children }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (dispatch && dispatch !== null && dispatch !== undefined) {
+      dispatch(check_auth_status());
+    }
+  }, [dispatch]);
+
   return (
     <>
       <Head>
