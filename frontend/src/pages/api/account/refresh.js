@@ -25,18 +25,39 @@ const refresh = async (req, res) => {
         },
         body: body,
       });
+      const data = await apiRes.json();
 
       if (apiRes.status === 200) {
-        return res.status(200).json({ success: 'Authenticated successfully' });
+        res.setHeader('Set-Cookie', [
+          cookie.serialize('access', data.access, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== 'development',
+            maxAge: 60 * 30,
+            sameSite: 'strict',
+            path: '/api/',
+          }),
+          cookie.serialize('refresh', data.refresh, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== 'development',
+            maxAge: 60 * 60 * 24,
+            sameSite: 'strict',
+            path: '/api/',
+          }),
+        ]);
+
+        // * This response is from Node.js
+        return res.status(200).json({ success: 'Refresh request successful' });
       } else {
         return res
           .status(apiRes.status)
-          .json({ error: 'Failed to authenticate' });
+          .json({ error: 'Failed to fulfill refresh request' });
       }
     } catch (error) {
       return res
         .status(500)
-        .json({ error: 'Something went wrong while trying to authenticate' });
+        .json({
+          error: 'Something went wrong while trying to fulfill refresh request',
+        });
     }
   } else {
     res.setHeader('Allow', ['GET']);
