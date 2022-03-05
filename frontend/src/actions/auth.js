@@ -57,6 +57,7 @@ export const check_auth_status = () => async dispatch => {
       dispatch({
         type: AUTHENTICATED_SUCCESS,
       });
+      dispatch(load_user());
     } else {
       dispatch({
         type: AUTHENTICATED_FAIL,
